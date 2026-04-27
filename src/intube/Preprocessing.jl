@@ -102,8 +102,8 @@ end
 #     initialize_ohpsys(fluid_type,sys,p_fluid,Tref,power)
 # end
 
-function initialize_ohpsys(sys,p_fluid,power;boil_waiting_time=1.0,Rn_boil=3e-6,inertia_f=1.3,tube_d=1e-3,tubeshape="square",g_angle=(3/2)*π,Nu=3.6,slugnum=30,film_fraction=0.3,g = 0*9.81,ηplus=0.6,ηminus=0.0,nucleatenum = 250,L_newbubble = 6e-3)
-
+function initialize_ohpsys(sys,p_fluid,power;chargeratio=0.46, boil_waiting_time=1.0,Rn_boil=3e-6,inertia_f=1.3,tube_d=1e-3,tubeshape="square",g_angle=(3/2)*π,Nu=3.6,slugnum=30,film_fraction=0.3,g = 0*9.81,ηplus=0.6,ηminus=0.0,nucleatenum = 250,L_newbubble = 6e-3)
+    
     L = (sys.qline[1].arccoord[1] + sys.qline[1].arccoord[end])  # total length of the pipe when streched to a 1D pipe (an approximate here)
     ohp = sys.qline[1]
     @unpack x,y = ohp.body
@@ -138,7 +138,7 @@ function initialize_ohpsys(sys,p_fluid,power;boil_waiting_time=1.0,Rn_boil=3e-6,
 
         # line = []
         # X0,realratio = onesideXp(ohp,tube,line)
-        X0,realratio = randomXp(tube,numofslugs=slugnum)
+        X0,realratio = randomXp(tube,numofslugs=slugnum, chargeratio=chargeratio)
         dXdt0_l = zeros(length(X0))
         dXdt0_r = zeros(length(X0))
         dXdt0 = map(tuple,dXdt0_l,dXdt0_r);
