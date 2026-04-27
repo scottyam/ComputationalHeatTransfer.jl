@@ -1,7 +1,5 @@
-# Using initialize_ohpsys
-initialize_ohpsys
-
-# Using 
+# Added Files
+There are two files used to run the simulation that I added. One loops through different fill ratios, and one loops through the number of turns in the OHP. There is a post processing file which is used to fined effective k and to generat heat maps.
 
 # Source code changes for fill ratio
 File we are editing: Preprocessing.jl
